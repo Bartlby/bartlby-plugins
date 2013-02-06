@@ -1,0 +1,9 @@
+bartlby_http
+bartlby_tcp
+*.o
+Makefile.conf
+config.log
+config.status
+postinstall-pak
+preinstall-pak
+
