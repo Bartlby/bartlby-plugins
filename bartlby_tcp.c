@@ -123,7 +123,7 @@ void my_exit(int code, char * msg) {
 int my_regMatch(char * subj, char * pat) {
 	int iResult;	
 	regex_t reg;
-	if(regcomp(&reg, pat, RE_SYNTAX_EGREP) != 0) {
+	if(regcomp(&reg, pat, REG_EXTENDED) != 0) {
 		return -1;
 	}
 	iResult = regexec(&reg, subj,0 ,0,0);

@@ -29,6 +29,8 @@ static int recieved_bytes;
 struct timeval tv_done;
 int timing;
 
+int HTTP_code;
+
 #define CRITICAL 2
 #define WARN 1
 #define OK 0
@@ -41,7 +43,7 @@ int timing;
 int my_regMatch(char * subj, char * pat) {
 	int iResult;	
 	regex_t reg;
-	if(regcomp(&reg, pat, RE_SYNTAX_EGREP) != 0) {
+	if(regcomp(&reg, pat, REG_EXTENDED) != 0) {
 		return -1;
 	}
 	iResult = regexec(&reg, subj,0 ,0,0);
@@ -55,12 +57,19 @@ int my_regMatch(char * subj, char * pat) {
 
 
 void my_exit(int i, char * msg, int http_code) {
-	printf("Check HTTP 1.0 h.januschka - Server: %s; Port: %d; URI: %s;HTTP: %d; [%s] Time: %03ld/%03ld Bytes: %d ", hostname, port, request, http_code,  msg, tv_done.tv_sec, tv_done.tv_usec, recieved_bytes);
+	printf("Server: %s; Port: %d; URI: %s;HTTP: %d; [%s] Time: %03ld/%03ld Bytes: %d Code: %d", hostname, port, request, http_code,  msg, tv_done.tv_sec, tv_done.tv_usec, recieved_bytes, HTTP_code);
 	if(neo_reg) printf(" NEOGATED ");
+
+	if(!do_regex) {
+		printf(" | time=%f;;;0.000000 size=%dB;;;0", (float)timing/1000, recieved_bytes);
+	}
 	
 	if(do_regex && http_code != 0) { 
-		
-		printf(" matched: %s/%d \n", regex, reg_matched);
+			
+
+		printf(" matched: %s/%d ", regex, reg_matched);
+		printf(" | time=%f;;;0 size=%dB;;;0\n", (float)timing/1000, recieved_bytes);
+
 		if(reg_matched > 0) {
 			if(!neo_reg) {
 				exit(OK);
@@ -75,6 +84,7 @@ void my_exit(int i, char * msg, int http_code) {
 			}
 		}
 	}
+
 	printf("\n");
 	
 	exit(i);
@@ -196,7 +206,7 @@ int main(int argc, char ** argv) {
 	int c_sock;
 	int b_rtc;
 	
-	int HTTP_code;
+
 	
 	char * client_request;
 	char server_return[1024];
@@ -299,6 +309,9 @@ int main(int argc, char ** argv) {
 	while ((b_rtc = read(c_sock, server_return, 1024))) {
 		//printf("%d: %s\n", b_rtc, server_return);
 		sscanf(server_return, "HTTP/1.1 %d\r\n", &HTTP_code);
+		if(HTTP_code == 0) {
+			sscanf(server_return, "HTTP/1.0 %d\r\n", &HTTP_code);
+		}
 		server_return[b_rtc]='\0';
 		strcat(fin_server_return, server_return);
 		
@@ -334,7 +347,7 @@ int main(int argc, char ** argv) {
 	timing=bartlby_milli_timediff(tv_end, tv_start);
 
 	if(do_perf == 1 ) {
-		printf("PERF: %d ms\n", timing);
+		//printf("PERF: %d ms\n", timing);
 	}
 	
 	
