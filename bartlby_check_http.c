@@ -61,14 +61,14 @@ void my_exit(int i, char * msg, int http_code) {
 	if(neo_reg) printf(" NEOGATED ");
 
 	if(!do_regex) {
-		printf(" | time=%f;;;0.000000 size=%dB;;;0", (float)timing/1000, recieved_bytes);
+		//printf(" | time=%f;;;0.000000 size=%dB;;;0", (float)timing/1000, recieved_bytes);
 	}
 	
 	if(do_regex && http_code != 0) { 
 			
 
 		printf(" matched: %s/%d ", regex, reg_matched);
-		printf(" | time=%f;;;0 size=%dB;;;0\n", (float)timing/1000, recieved_bytes);
+		//printf(" | time=%f;;;0 size=%dB;;;0\n", (float)timing/1000, recieved_bytes);
 
 		if(reg_matched > 0) {
 			if(!neo_reg) {
@@ -347,7 +347,7 @@ int main(int argc, char ** argv) {
 	timing=bartlby_milli_timediff(tv_end, tv_start);
 
 	if(do_perf == 1 ) {
-		//printf("PERF: %d ms\n", timing);
+		printf("PERF: time=%f size=%d\n", (float)timing/1000, recieved_bytes);
 	}
 	
 	
