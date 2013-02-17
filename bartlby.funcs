@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #########################################
 # Bartlby global plugin functions
 # $Id: bartlby.funcs,v 1.4 2005/11/16 23:52:43 hjanuschka Exp $ */

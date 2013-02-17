@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #########################################
 # Bartlby Check Disk
 # $Id: bartlby_dns.sh,v 1.1 2005/10/13 23:08:28 hjanuschka Exp $ */

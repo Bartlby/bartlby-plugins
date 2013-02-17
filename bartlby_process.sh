@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #########################################
 # Bartlby Check Disk
 # $Id: bartlby_process.sh,v 1.4 2006/09/09 20:10:09 hjanuschka Exp $ */

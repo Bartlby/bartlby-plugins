@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #########################################
 # Bartlby Check Disk
 # $Id: bartlby_snmp.sh,v 1.2 2005/12/27 21:45:08 hjanuschka Exp $ */

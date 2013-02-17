@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #########################################
 # Bartlby Check Disk
 # $Id: bartlby_swap.sh,v 1.5 2006/09/09 19:38:42 hjanuschka Exp $ */

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #int main(int argc, char ** argv) {
 #		double loadavgs[3];
 #		int rtc;
