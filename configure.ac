@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(bartlby-plugins, 1.4.4 , helmut@januschka.com)
+AC_INIT(bartlby-plugins,1.4.5, helmut@januschka.com)
 AC_PREFIX_DEFAULT(/usr/local/bartlby-agent/plugins/)
 
 
